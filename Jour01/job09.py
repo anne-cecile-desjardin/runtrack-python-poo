@@ -1,28 +1,52 @@
 class Produit:
-
     def __init__(self, nom, prixHT, TVA):
         self.nom = nom
-        self.prixHT = prixHT
+        self.prix = prixHT
         self.TVA = TVA
 
-    def CalculerPrixTTC(self):
-        
-        prixTTC = self.prixHT * (1 + self.TVA)
-
-        return "Le prix du produit TTC est : " + str(prixTTC) + " euro(s)"
+    def calculerPrixTTC(self):
+        self.prixTTC = self.prix * (1 + self.TVA / 100)
+        return f"Le prix TTC est : {round(self.prixTTC,2)} €"
     
+    def calculeTVA(self):
+        self.TVA = self.prixTTC - self.prix
+        return f"La TVA est de : {round(self.TVA,2)} €"
+
     def afficher(self):
-        return "Les informations du produit sont : Nom : " + str(self.nom) + "; PrixHT : " + str(self.prixHT) + " euro(s)" + "; TVA appliquée : " + str(self.TVA) + "."
-    
-    def nomProduit(self):
-        return str(self.nom)
-    
-    def prixProduit(self):
-        return str(self.prixHT)
+        return f"Le produit {self.nom} coûte {self.prix}€ HT et {round (self.prixTTC, 2)} € TTC."
 
-produit1 = Produit("Pâtisson", 3, 0.2)
-produit2 = Produit("Pastèque", 5, 0.2)
-produit3 = Produit("Téléphone", 350, 0.2)
-produit4 = Produit("Voiture", 5000, 0.2)
+    def modifierNom(self, nom):
+        self.nom = nom
+        return self.nom
+    
+    def modifierPrixHT(self, prixHT):
+        self.prix = prixHT
+        return f"{round(self.prix, 2)} €"
+    
 
-print(produit1.afficher(), produit1.CalculerPrixTTC(), produit2.afficher(), produit2.CalculerPrixTTC(), produit3.afficher(), produit3.CalculerPrixTTC(), produit4.afficher(), produit4.CalculerPrixTTC())
+
+p1 = Produit("banane", 1, 20)
+print(p1.calculerPrixTTC())
+print(p1.calculeTVA())
+print(p1.afficher())
+print(p1.modifierNom("pomme"))
+print(p1.modifierPrixHT(2))
+print(p1.calculerPrixTTC())
+print(p1.calculeTVA())
+
+
+p2 = Produit("orange", 1.5, 20)
+print(p2.calculerPrixTTC())
+print(p2.calculeTVA())
+print(p2.afficher())
+
+
+p3= Produit("poire", 2, 20)
+print(p3.calculerPrixTTC())
+print(p3.calculeTVA())
+print(p3.afficher())
+
+p4= Produit("fraise", 2.5, 20)
+print(p4.calculerPrixTTC())
+print(p4.calculeTVA())
+print(p4.afficher())
